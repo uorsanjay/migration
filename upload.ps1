@@ -1,7 +1,6 @@
 # echo $env:as_AccessKey
 # echo $env:as_SecretKey 
 $localVhdPath=Get-Content -Path filepath.txt
-echo $localVhdPath
 AWSCredential -AccessKey $as_AccessKey -SecretKey $as_SecretKey -StoreAs UttamProfile2
 Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName UttamProfile2
 $container1 = New-Object Amazon.EC2.Model.ImageDiskContainer
