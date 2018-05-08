@@ -11,4 +11,4 @@ $vhdUri = $vm.StorageProfile.OsDisk.Vhd.Uri
 $localVhdPath = "$($shareDrive.Name):\$($vm.Name).vhd"
 Save-AzureRmVhd -LocalFilePath $localVhdPath -ResourceGroupName $vm.ResourceGroupName -SourceUri $vhdUri -NumberOfThreads 32 -OverWrite
 $localVhdPath > filepath.txt
-$localVhdPath=Get-Content -Path filepath.txt
+
