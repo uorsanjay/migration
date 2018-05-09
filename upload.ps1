@@ -1,5 +1,16 @@
 # echo $env:as_AccessKey
 # echo $env:as_SecretKey 
+
+$secpasswd = ConvertTo-SecureString $env:az_password -AsPlainText -Force
+$cred = New-Object System.Management.Automation.PSCredential ($env:az_username, $secpasswd)
+Connect-AzureRmAccount -Credential $cred
+$storageAccount = Get-AzureRmStorageAccount -ResourceGroupName CloudPractice -Name cloudpracticediag625
+$storageKey = (Get-AzureRmStorageAccountKey -ResourceGroupName $storageAccount.ResourceGroupName -Name $storageAccount.StorageAccountName | select -first 1).Value
+$storageContext = New-AzureStorageContext -StorageAccountName $storageAccount.StorageAccountName -StorageAccountKey $storageKey
+$share = Get-AzureStorageShare -Name mymigrateshare -Context $storageContext
+$secKey = ConvertTo-SecureString -String $storageKey -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential ($storageAccount.StorageAccountName, $secKey)
+$shareDrive = New-PSDrive -Name X -PSProvider FileSystem -Root "\\$($storageAccount.StorageAccountName).file.core.windows.net\$($share.Name)" -Credential $credential -Persist
 $localVhdPath=Get-Content -Path filepath.txt
 Set-AWSCredential -AccessKey $env:as_AccessKey -SecretKey $env:as_SecretKey -StoreAs UttamProfile2
 Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName UttamProfile2
