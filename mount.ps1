@@ -9,17 +9,15 @@ $vm = Get-AzureRmVM -Name testrhel -ResourceGroupName CloudPractice
 $vhdUri = $vm.StorageProfile.OsDisk.Vhd.Uri
 $localVhdPath = "$($shareDrive.Name):\$($vm.Name).vhd"
 Save-AzureRmVhd -LocalFilePath $localVhdPath -ResourceGroupName $vm.ResourceGroupName -SourceUri $vhdUri -NumberOfThreads 32 -OverWrite
-# echo $env:as_AccessKey
-# echo $env:as_SecretKey 
-Set-AWSCredential -ProfileName MyProfileName138
-Set-AWSCredential -AccessKey "$env:as_AccessKey" -SecretKey "$env:as_SecretKey" -StoreAs MyProfileName138
-Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName MyProfileName138
+Set-AWSCredential -ProfileName MyProfile1
+Set-AWSCredential -AccessKey "$env:as_AccessKey" -SecretKey "$env:as_SecretKey" -StoreAs MyProfile1
+Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName MyProfile1
 $container = New-Object Amazon.EC2.Model.ImageDiskContainer
 $container.Format = 'VHD'
 $container.UserBucket = New-Object Amazon.EC2.Model.UserBucket
 $container.UserBucket.S3Bucket = 'migration-azure-tcs'
 $container.UserBucket.S3Key = 'X:/testrhel.vhd'
-$params4 = @{ ClientToken = 'idempotencyToken4'; Platform = 'Linux'; LicenseType = 'BYOL'; DiskContainer = $container2 }
-$task = Import-EC2Image @params -ProfileName MyProfileName138
-Import-EC2Image @params4 -ProfileName MyProfileName138
-Get-EC2ImportImageTask -ImportTaskId $task.ImportTaskId  -ProfileName MyProfileName138
+$params = @{ ClientToken = 'idempotencyToken'; Platform = 'Linux'; LicenseType = 'BYOL'; DiskContainer = $container }
+$task = Import-EC2Image @params -ProfileName MyProfile1
+Import-EC2Image @params -ProfileName MyProfile1
+Get-EC2ImportImageTask -ImportTaskId $task.ImportTaskId  -ProfileName MyProfile1
