@@ -12,7 +12,7 @@ Save-AzureRmVhd -LocalFilePath $localVhdPath -ResourceGroupName $vm.ResourceGrou
 # echo $env:as_AccessKey
 # echo $env:as_SecretKey 
 Set-AWSCredential -ProfileName MyProfileName138
-Set-AWSCredential -AccessKey "$env:as_AccessKey" -SecretKey "$env:as_SecretKey" -StoreAs MyProfileName138
+Set-AWSCredential -AccessKey $env:as_AccessKey -SecretKey $env:as_SecretKey -StoreAs MyProfileName138
 Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName MyProfileName138
 $container = New-Object Amazon.EC2.Model.ImageDiskContainer
 $container.Format = 'VHD'
