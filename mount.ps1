@@ -11,4 +11,4 @@ $localVhdPath = "$($shareDrive.Name):\$($vm.Name).vhd"
 Save-AzureRmVhd -LocalFilePath $localVhdPath -ResourceGroupName $vm.ResourceGroupName -SourceUri $vhdUri -NumberOfThreads 32 -OverWrite
 Set-AWSCredential -ProfileName MyProfile1
 Set-AWSCredential -AccessKey "$env:as_AccessKey" -SecretKey "$env:as_SecretKey" -StoreAs MyProfile1
-Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName MyProfil
+Write-S3Object -BucketName migration-azure-tcs -File $localVhdPath -Key X:\testrhel.vhd -ProfileName MyProfile1
