@@ -1,3 +1,4 @@
+Set-AWSCredential -AccessKey "$env:as_AccessKey" -SecretKey "$env:as_SecretKey" -StoreAs MyProfile1
 $container = New-Object Amazon.EC2.Model.ImageDiskContainer
 $container.Format = 'VHD'
 $container.UserBucket = New-Object Amazon.EC2.Model.UserBucket
