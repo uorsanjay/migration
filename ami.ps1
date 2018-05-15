@@ -1,0 +1,1 @@
+Set-AWSCredential -AccessKey AKIAJGQOLAO2N5TT7O7A -SecretKey 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 -StoreAs UttamProfile2
