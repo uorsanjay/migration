@@ -1,5 +1,6 @@
-#$secretkey = ConvertTo-SecureString $Env:AWS_SECRET_ACCESS_KEY -AsPlainText -Force
+$secretkey = ConvertTo-SecureString $Env:AWS_SECRET_ACCESS_KEY -AsPlainText -Force
 #$accesskey = ConvertTo-SecureString $Env:AWS_ACCESS_KEY_ID -AsPlainText -Force
+#Set-AWSCredential -AccessKey "$env:as_AccessKey" -SecretKey "$env:as_SecretKey" -StoreAs MyProfile1
 Set-AWSCredential -AccessKey "$env:AWS_ACCESS_KEY_ID" -SecretKey "$env:AWS_SECRET_ACCESS_KEY" -StoreAs UttamProfile2
 $container = New-Object Amazon.EC2.Model.ImageDiskContainer
 $container.Format = 'VHD'
