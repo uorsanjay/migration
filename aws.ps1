@@ -1,6 +1,6 @@
 $secretkey = ConvertTo-SecureString $Env:AWS_SECRET_ACCESS_KEY -AsPlainText -Force
-#$accesskey = ConvertTo-SecureString $Env:AWS_ACCESS_KEY_ID -AsPlainText -Force
-Set-AWSCredential -AccessKey $Env:AWS_ACCESS_KEY_ID -SecretKey $secretkey  -StoreAs UttamProfile2
+$accesskey = ConvertTo-SecureString $Env:AWS_ACCESS_KEY_ID -AsPlainText -Force
+Set-AWSCredential -AccessKey $accesskey -SecretKey $secretkey  -StoreAs UttamProfile2
 $container = New-Object Amazon.EC2.Model.ImageDiskContainer
 $container.Format = 'VHD'
 $container.UserBucket = New-Object Amazon.EC2.Model.UserBucket
