@@ -1,4 +1,4 @@
-Set-AWSCredential -AccessKey AKIAJGQOLAO2N5TT7O7A -SecretKey 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 -StoreAs UttamProfile2
+Set-AWSCredential -AccessKey $Env:AWS_ACCESS_KEY_ID -SecretKey $Env:AWS_SECRET_ACCESS_KEY  -StoreAs UttamProfile2
 $container = New-Object Amazon.EC2.Model.ImageDiskContainer
 $container.Format = 'VHD'
 $container.UserBucket = New-Object Amazon.EC2.Model.UserBucket
