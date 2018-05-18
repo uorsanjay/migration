@@ -1,4 +1,4 @@
-while ((Get-EC2ImportImageTask -ImportTaskId $task.ImportTaskId).Status -ne 'completed') {
+while ((Get-EC2ImportImageTask -ImportTaskId $task.ImportTaskId).Status -eq 'completed') {
 Write-Host 'Waiting for image to import...'
 Start-Sleep -Seconds 10
 }
